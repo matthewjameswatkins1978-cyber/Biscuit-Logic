@@ -68,7 +68,15 @@ Our standard scene is intentionally boring and reliable:
 - record to MKV for crash safety
 - remux to MP4 for submission
 
-See [`docs/OBS_SETUP.md`](docs/OBS_SETUP.md).
+See [`docs/OBS_SETUP.md`](docs/OBS_SETUP.md) and [`docs/WORKFLOW.md`](docs/WORKFLOW.md).
+
+## Tests
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+The same test suite runs automatically on GitHub Actions.
 
 ## Philosophy
 
