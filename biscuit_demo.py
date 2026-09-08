@@ -56,6 +56,9 @@ def command_init(args: argparse.Namespace) -> int:
         "PROJECT_NAME": args.name,
         "TAGLINE": args.tagline,
         "BRAND_MODE": args.brand,
+        "PROJECT_NAME_JSON": json.dumps(args.name, ensure_ascii=False),
+        "TAGLINE_JSON": json.dumps(args.tagline, ensure_ascii=False),
+        "BRAND_MODE_JSON": json.dumps(args.brand),
     }
 
     files = {
