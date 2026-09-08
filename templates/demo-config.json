@@ -1,0 +1,17 @@
+{
+  "project": {
+    "name": "{{PROJECT_NAME}}",
+    "tagline": "{{TAGLINE}}"
+  },
+  "demo": {
+    "target_seconds": 90,
+    "format": "show-first",
+    "resolution": "1920x1080",
+    "fps": 30,
+    "audio_hz": 48000
+  },
+  "branding": {
+    "mode": "{{BRAND_MODE}}",
+    "position": "bottom-right"
+  }
+}
