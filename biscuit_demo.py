@@ -67,10 +67,10 @@ def command_init(args: argparse.Namespace) -> int:
         "demo-checklist.md": render_template("demo-checklist.md", values),
     }
 
-    print(f"Biscuit Demo → {project}")
+    print(f"Biscuit Demo -> {project}")
     for filename, content in files.items():
         result = write_safely(demo / filename, content, args.force)
-        marker = "✓" if result == "written" else "·"
+        marker = "OK" if result == "written" else "--"
         print(f"  {marker} {filename}: {result}")
 
     print("\nNext:")
@@ -103,17 +103,17 @@ def command_check(args: argparse.Namespace) -> int:
     demo = project / "demo"
     failures: list[str] = []
 
-    print(f"Biscuit Demo check → {project}")
+    print(f"Biscuit Demo check -> {project}")
     if not demo.is_dir():
-        print("  ✗ demo/: missing")
+        print("  ERROR demo/: missing")
         return 1
 
     for filename in REQUIRED_DEMO_FILES:
         path = demo / filename
         if path.is_file():
-            print(f"  ✓ {filename}")
+            print(f"  OK {filename}")
         else:
-            print(f"  ✗ {filename}: missing")
+            print(f"  ERROR {filename}: missing")
             failures.append(filename)
 
     config_path = demo / "demo-config.json"
@@ -124,26 +124,26 @@ def command_check(args: argparse.Namespace) -> int:
             target = config.get("demo", {}).get("target_seconds")
             if brand not in BRAND_MODES:
                 failures.append("invalid branding.mode")
-                print(f"  ✗ branding.mode: {brand!r}")
+                print(f"  ERROR branding.mode: {brand!r}")
             else:
-                print(f"  ✓ branding.mode: {brand}")
+                print(f"  OK branding.mode: {brand}")
             if not isinstance(target, int) or not 30 <= target <= 180:
                 failures.append("invalid demo.target_seconds")
-                print(f"  ✗ demo.target_seconds: {target!r}")
+                print(f"  ERROR demo.target_seconds: {target!r}")
             else:
-                print(f"  ✓ target length: {target}s")
+                print(f"  OK target length: {target}s")
         except (json.JSONDecodeError, OSError) as exc:
             failures.append("invalid demo-config.json")
-            print(f"  ✗ config: {exc}")
+            print(f"  ERROR config: {exc}")
 
     obs = _find_obs()
     ffmpeg = shutil.which("ffmpeg")
-    print(f"  {'✓' if obs else '·'} OBS Studio: {obs or 'not found on this machine'}")
-    print(f"  {'✓' if ffmpeg else '·'} FFmpeg: {ffmpeg or 'not found on PATH (optional)'}")
+    print(f"  {'OK' if obs else '--'} OBS Studio: {obs or 'not found on this machine'}")
+    print(f"  {'OK' if ffmpeg else '--'} FFmpeg: {ffmpeg or 'not found on PATH (optional)'}")
 
     for folder in ("sample-input", "sample-output", "screenshots"):
         path = demo / folder
-        print(f"  {'✓' if path.is_dir() else '·'} {folder}/")
+        print(f"  {'OK' if path.is_dir() else '--'} {folder}/")
 
     if failures:
         print("\nNOT READY: fix the required demo packet items above.")
