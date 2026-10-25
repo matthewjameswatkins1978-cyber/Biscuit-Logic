@@ -2,7 +2,7 @@
 
 **Build the thing. Then show it working.** 🍪
 
-[Biscuit Logic](https://biscuitlogic.com) is an independent creative technology studio. This repository is home to **Biscuit Demo**, a tiny reusable hackathon demonstration kit. 
+[Biscuit Logic](https://biscuitlogic.com) is an independent creative technology studio. This repository is home to **Biscuit Demo**, a tiny reusable hackathon demonstration kit.
 
 Its job is simple: get a project from "it works on my machine" to a clear 60–90 second show-and-tell without turning the final evening into a video-production project.
 
